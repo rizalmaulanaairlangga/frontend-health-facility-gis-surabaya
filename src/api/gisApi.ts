@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { AnalysisData, FacilityData, GeoJsonData } from '../types';
 
-const API_BASE_URL = 'http://localhost:5100/api/gis';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5100/api/gis';
 
 export const fetchAnalysis = async (): Promise<AnalysisData[]> => {
   const response = await axios.get(`${API_BASE_URL}/analysis`);
