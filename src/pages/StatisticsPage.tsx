@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useHeader } from '../context/HeaderContext';
 import { fetchFaskes, fetchAnalysis } from '../api/gisApi';
 import type { FacilityData, AnalysisData } from '../types';
-import { Activity, Building2, TrendingUp, Plus, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Activity, Building2, TrendingUp, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import Counter from '../components/Counter';
 
 const formatNumber = (value: number) => new Intl.NumberFormat('id-ID').format(value);
@@ -74,8 +74,7 @@ const StatisticsPage: React.FC = () => {
     return selectedType === typeKey;
   };
 
-  // Helper to get active state class for cross-chart styling
-  const isAnyTypeSelected = selectedType !== null;
+
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const container = e.currentTarget.closest('.relative');
@@ -345,13 +344,7 @@ const StatisticsPage: React.FC = () => {
     });
   }, [yearlyData]);
 
-  // Calculate Average Growth / New Additions
-  const growthRate = useMemo(() => {
-    if (yearlyData.length < 2) return 0;
-    const first = yearlyData[0].total_faskes;
-    const last = yearlyData[yearlyData.length - 1].total_faskes;
-    return (((last - first) / (first || 1)) * 100);
-  }, [yearlyData]);
+
 
   // Find active segment details for tooltip displaying (cross-chart sync)
   const activeSegmentDetails = useMemo(() => {

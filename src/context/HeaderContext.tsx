@@ -2,9 +2,9 @@ import React, { createContext, useContext, useMemo, useState, useEffect } from '
 
 type HeaderContextType = {
   selectedYear: number | 'all';
-  setSelectedYear: (value: number | 'all') => void;
+  setSelectedYear: React.Dispatch<React.SetStateAction<number | 'all'>>;
   availableYears: number[];
-  setAvailableYears: (value: number[]) => void;
+  setAvailableYears: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);

@@ -8,7 +8,7 @@ type ChartPoint = {
 
 interface DistrictRatioChartProps {
   data: ChartPoint[];
-  selectedYear: number;
+  selectedYear: number | 'all';
 }
 
 const ChartValueLabel: React.FC<{ x: number; y: number; value: number; isSelected: boolean }> = ({ x, y, value, isSelected }) => {

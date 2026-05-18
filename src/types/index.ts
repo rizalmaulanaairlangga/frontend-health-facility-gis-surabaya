@@ -9,6 +9,7 @@ export interface AnalysisData {
   rasio_scaled: number;
   kategori: string;
   warna: string;
+  total_faskes_count?: number;
 }
 
 export interface FacilityData {

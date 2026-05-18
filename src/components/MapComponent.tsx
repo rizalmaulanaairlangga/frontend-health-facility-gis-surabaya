@@ -6,7 +6,7 @@ import type { AnalysisData, GeoJsonData } from '../types';
 interface MapComponentProps {
   geoData: GeoJsonData;
   analysisData: AnalysisData[];
-  selectedYear: number;
+  selectedYear: number | 'all';
   selectedDistrict: string | null;
   highlightedRange: string | null;
   onKecamatanClick: (name: string) => void;

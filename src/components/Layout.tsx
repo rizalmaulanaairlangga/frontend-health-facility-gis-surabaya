@@ -30,7 +30,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         // Populate and initialize Available Years in Header Context
         const years = Array.from(new Set(data.map((item) => item.tahun))).sort((a, b) => b - a);
         setAvailableYears(years);
-        setSelectedYear(prev => (prev === 0 || !prev) && years.length ? years[0] : prev);
+        setSelectedYear((prev: number | 'all') => (prev === 0 || !prev) && years.length ? years[0] : prev);
       } catch (error) {
         console.error('Failed to load metadata in Layout:', error);
       }

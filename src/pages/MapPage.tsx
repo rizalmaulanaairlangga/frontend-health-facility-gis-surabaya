@@ -53,10 +53,10 @@ const MapPage: React.FC = () => {
         setFaskesData(faskes);
         const years = Array.from(new Set(analysis.map((item) => item.tahun))).sort((a, b) => b - a);
         setAvailableYears(years);
-        setSelectedYear(prev => (prev === 0 || !prev) && years.length ? years[0] : prev);
+        setSelectedYear((prev: number | 'all') => (prev === 0 || !prev) && years.length ? years[0] : prev);
       } catch (err) {
         console.error('Failed to fetch GIS data:', err);
-        setError('Gagal memuat data. Pastikan backend berjalan di http://localhost:5100');
+        setError('Gagal memuat data dari server. Pastikan layanan backend Anda aktif dan berjalan dengan benar.');
       } finally {
         setLoading(false);
       }
@@ -71,7 +71,7 @@ const MapPage: React.FC = () => {
   );
 
   useEffect(() => {
-    setSelectedYear(prev => (prev === 0 || !prev) && years.length ? years[0] : prev);
+    setSelectedYear((prev: number | 'all') => (prev === 0 || !prev) && years.length ? years[0] : prev);
   }, [years]);
 
   const currentYearData = useMemo(
@@ -200,7 +200,7 @@ const MapPage: React.FC = () => {
             <p className="text-xs uppercase tracking-[0.28em] text-sky-600 font-black mb-2">Total Penduduk</p>
             <p className="text-2xl font-black text-slate-900 group-hover:text-sky-700 transition-colors">
               <Counter 
-                value={selectedDistrictData ? selectedDistrictData.jumlah_penduduk : totalPopulation} 
+                value={selectedDistrictData?.jumlah_penduduk ?? totalPopulation ?? 0} 
                 formatter={formatNumber} 
               />
             </p>
@@ -213,7 +213,7 @@ const MapPage: React.FC = () => {
             <p className="text-xs uppercase tracking-[0.28em] text-sky-600 font-black mb-2">Total Fasilitas</p>
             <p className="text-2xl font-black text-slate-900 group-hover:text-sky-700 transition-colors">
               <Counter 
-                value={selectedDistrictData ? (selectedDistrictData.total_faskes_count ?? selectedDistrictData.total_fasilitas) : totalFacilities} 
+                value={selectedDistrictData ? (selectedDistrictData.total_faskes_count ?? selectedDistrictData.total_fasilitas ?? 0) : totalFacilities} 
                 formatter={formatNumber} 
               />
             </p>
